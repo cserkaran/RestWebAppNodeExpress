@@ -1,0 +1,24 @@
+{
+  "name": "bookapi",
+  "version": "1.0.0",
+  "description": "REST based web app with nodejs and express framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cserkaran/RestWebAppNodeExpress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cserkaran/RestWebAppNodeExpress/issues"
+  },
+  "homepage": "https://github.com/cserkaran/RestWebAppNodeExpress#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1"
+  }
+}
