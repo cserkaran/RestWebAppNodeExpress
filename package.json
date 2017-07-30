@@ -20,7 +20,12 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-mocha": "^4.3.1",
     "gulp-nodemon": "^2.2.1",
-    "mongoose": "^4.11.4"
+    "mongoose": "^4.11.4",
+    "should": "^11.2.1",
+    "sinon": "^2.4.1",
+    "supertest": "^3.0.0"
   }
 }

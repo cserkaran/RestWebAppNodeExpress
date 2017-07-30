@@ -3,34 +3,25 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 var routes = function(Book) {
-    var db = mongoose.connect('mongodb://localhost/bookAPI', {
-        useMongoClient: true,
-        /* other options */
-    });
+    var db;
+    if (process.env.ENV === 'TEST') {
+        db = mongoose.connect('mongodb://localhost/bookAPI_TEST', {
+            useMongoClient: true,
+            /* other options */
+        });
+    } else {
+        db = mongoose.connect('mongodb://localhost/bookAPI', {
+            useMongoClient: true,
+            /* other options */
+        });
+    }
 
     var bookRouter = express.Router();
+    var bookController = require('../controllers/bookController')(Book);
+
     bookRouter.route('/Books')
-        .post(function(req, res) {
-            var book = new Book(req.body);
-
-            book.save();
-            res.status(201).send(book);
-        })
-        .get(function(req, res) {
-            var query = {};
-
-            if (req.query.genre) {
-                query.genre = req.query.genre;
-            }
-
-            Book.find(query, function(err, books) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.json(books);
-                }
-            });
-        });
+        .post(bookController.post)
+        .get(bookController.get);
 
     bookRouter.use('/Books/:bookId', function(req, res, next) {
         Book.findById(req.params.bookId, function(err, book) {
@@ -47,7 +38,11 @@ var routes = function(Book) {
 
     bookRouter.route('/Books/:bookId')
         .get(function(req, res) {
-            res.json(req.book);
+            var returnBook = req.book.toJSON();
+            returnBook.links = {};
+            var newLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
+            returnBook.links.FilterByThisGenre = newLink.replace(' ', '%20');
+            res.json(returnBook);
         })
         .put(function(req, res) {
             var book = req.book;
