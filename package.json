@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/cserkaran/RestWebAppNodeExpress#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.2.1"
+    "gulp-nodemon": "^2.2.1",
+    "mongoose": "^4.11.4"
   }
 }
